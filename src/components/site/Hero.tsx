@@ -229,7 +229,7 @@ export function Hero() {
                         Relaxation / Swedish
                       </span>
                       <span className="text-copper font-display shrink-0 text-base tabular-nums">
-                        From ₹2,199
+                        From ₹1,500
                       </span>
                     </li>
                     <li className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
@@ -237,15 +237,15 @@ export function Hero() {
                         Massage + steam
                       </span>
                       <span className="text-copper font-display shrink-0 text-base tabular-nums">
-                        ₹3,199
+                        ₹2,500
                       </span>
                     </li>
                     <li className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                       <span className="min-w-0 font-medium text-ink/80">
-                        Couple massage
+                        Couple + jacuzzi
                       </span>
                       <span className="text-copper font-display shrink-0 text-base tabular-nums">
-                        ₹4,599
+                        ₹5,000
                       </span>
                     </li>
                   </ul>

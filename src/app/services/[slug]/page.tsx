@@ -5,6 +5,7 @@ import { Header } from "@/components/site/Header";
 import { ServicePageView } from "@/components/site/ServicePageView";
 import {
   getAllServiceSlugs,
+  getPricingTiers,
   getServiceBySlug,
 } from "@/data/services";
 import { getServiceImageSrc } from "@/lib/service-images";
@@ -118,6 +119,30 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   const pageUrl = `${siteUrl}/services/${slug}`;
   const imageUrl = `${siteUrl}${getServiceImageSrc(slug)}`;
+  const tiers = getPricingTiers(service);
+  const offerSchema =
+    tiers.length > 1
+      ? {
+          "@type": "AggregateOffer" as const,
+          lowPrice: String(Math.min(...tiers.map((t) => t.priceInr))),
+          highPrice: String(Math.max(...tiers.map((t) => t.priceInr))),
+          priceCurrency: "INR",
+          offerCount: tiers.length,
+          availability: "https://schema.org/InStock",
+          url: pageUrl,
+          description: tiers
+            .map((t) => `${t.duration}: ${t.priceLabel}`)
+            .join(" · "),
+        }
+      : {
+          "@type": "Offer" as const,
+          price: String(service.priceInr),
+          priceCurrency: "INR",
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+          url: pageUrl,
+          description: `${service.duration}${service.priceNote ? ` · ${service.priceNote}` : ""}`,
+        };
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
@@ -153,15 +178,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       },
       telephone: `+91-${sitePhoneDisplay}`,
     },
-    offers: {
-      "@type": "Offer",
-      price: String(service.priceInr),
-      priceCurrency: "INR",
-      priceValidUntil: "2027-12-31",
-      availability: "https://schema.org/InStock",
-      url: pageUrl,
-      description: `${service.duration}${service.priceNote ? ` · ${service.priceNote}` : ""}`,
-    },
+    offers: offerSchema,
   };
 
   const breadcrumbJsonLd = {

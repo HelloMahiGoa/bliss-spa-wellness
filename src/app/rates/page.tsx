@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InnerPageLayout } from "@/components/site/InnerPageLayout";
-import { services } from "@/data/services";
+import { getPricingTiers, services } from "@/data/services";
 import {
   getWhatsAppHref,
   siteName,
@@ -53,22 +53,32 @@ export default function RatesPage() {
     `Hi ${siteName}, I'd like to ask about rates and book. `,
   );
 
-  const itemListElements = services.map((s, i) => ({
-    "@type": "ListItem" as const,
-    position: i + 1,
-    item: {
-      "@type": "Service",
-      name: s.title,
-      description: s.shortDescription,
-      url: `${siteUrl}/services/${s.slug}`,
-      offers: {
-        "@type": "Offer",
-        price: String(s.priceInr),
-        priceCurrency: "INR",
-        description: s.duration,
-      },
-    },
-  }));
+  let listPosition = 0;
+  const itemListElements = services.flatMap((s) => {
+    const tiers = getPricingTiers(s);
+    return tiers.map((t) => {
+      listPosition += 1;
+      return {
+        "@type": "ListItem" as const,
+        position: listPosition,
+        item: {
+          "@type": "Service",
+          name:
+            tiers.length > 1
+              ? `${s.title} — ${t.duration}`
+              : s.title,
+          description: s.shortDescription,
+          url: `${siteUrl}/services/${s.slug}`,
+          offers: {
+            "@type": "Offer",
+            price: String(t.priceInr),
+            priceCurrency: "INR",
+            description: t.duration,
+          },
+        },
+      };
+    });
+  });
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -107,7 +117,7 @@ export default function RatesPage() {
       {
         "@type": "ItemList",
         name: `${siteName} — services and prices`,
-        numberOfItems: services.length,
+        numberOfItems: itemListElements.length,
         itemListElement: itemListElements,
       },
     ],
@@ -158,37 +168,54 @@ export default function RatesPage() {
 
         {/* Mobile: stacked cards (no horizontal scroll) */}
         <ul className="mb-10 flex min-w-0 flex-col gap-3 md:hidden" aria-label="Service prices">
-          {services.map((s) => (
-            <li key={s.slug}>
-              <Link
-                href={`/services/${s.slug}`}
-                className="border-ink/10 from-parchment/95 to-cream/40 hover:border-copper/25 active:bg-cream/50 flex flex-col gap-2 rounded-2xl border bg-gradient-to-br p-4 shadow-[0_8px_28px_-18px_rgba(28,25,23,0.15)] transition-[border-color,box-shadow]"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <span className="text-ink font-semibold leading-snug">
-                    {s.title}
-                  </span>
-                  <span className="text-sage font-display shrink-0 text-lg font-semibold tabular-nums">
-                    {s.priceLabel}
-                  </span>
-                </div>
-                <div className="text-ink/55 flex flex-wrap items-center gap-x-2 text-xs">
-                  <span>{s.duration}</span>
-                  {s.priceNote ? (
-                    <>
-                      <span aria-hidden className="text-ink/25">
-                        ·
+          {services.map((s) => {
+            const tiers = getPricingTiers(s);
+            return (
+              <li key={s.slug}>
+                <div className="border-ink/10 from-parchment/95 to-cream/40 flex flex-col gap-3 rounded-2xl border bg-gradient-to-br p-4 shadow-[0_8px_28px_-18px_rgba(28,25,23,0.15)]">
+                  <div className="flex items-start justify-between gap-3">
+                    <Link
+                      href={`/services/${s.slug}`}
+                      className="text-ink font-semibold leading-snug underline-offset-4 hover:text-sage hover:underline"
+                    >
+                      {s.title}
+                    </Link>
+                    {tiers.length === 1 ? (
+                      <span className="text-sage font-display shrink-0 text-lg font-semibold tabular-nums">
+                        {tiers[0].priceLabel}
                       </span>
-                      <span>{s.priceNote}</span>
-                    </>
+                    ) : (
+                      <span className="text-sage font-display shrink-0 text-sm font-semibold tabular-nums">
+                        From {s.priceLabel}
+                      </span>
+                    )}
+                  </div>
+                  <ul className="text-ink/75 space-y-1.5 text-xs leading-relaxed">
+                    {tiers.map((t) => (
+                      <li
+                        key={`${s.slug}-${t.duration}-${t.priceInr}`}
+                        className="flex justify-between gap-3 border-b border-ink/5 pb-1.5 last:border-0 last:pb-0"
+                      >
+                        <span className="min-w-0">{t.duration}</span>
+                        <span className="text-sage font-display shrink-0 font-semibold tabular-nums">
+                          {t.priceLabel}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  {s.priceNote ? (
+                    <p className="text-ink/50 text-xs">{s.priceNote}</p>
                   ) : null}
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="text-sage text-xs font-semibold"
+                  >
+                    View details →
+                  </Link>
                 </div>
-                <span className="text-sage text-xs font-semibold">
-                  View details →
-                </span>
-              </Link>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
         {/* Desktop: table */}
@@ -210,38 +237,43 @@ export default function RatesPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {services.map((s, rowIdx) => (
-                    <tr
-                      key={s.slug}
-                      className={`border-ink/8 border-b transition-colors last:border-0 hover:bg-cream/40 ${
-                        rowIdx % 2 === 1 ? "bg-cream/25" : ""
-                      }`}
-                    >
-                      <th
-                        className="text-ink px-5 py-4 font-normal md:px-6"
-                        scope="row"
+                  {services.map((s, svcIdx) => {
+                    const tiers = getPricingTiers(s);
+                    const rowBg =
+                      svcIdx % 2 === 1 ? "bg-cream/25" : "";
+                    return tiers.map((t, tierIdx) => (
+                      <tr
+                        key={`${s.slug}-${tierIdx}`}
+                        className={`border-ink/8 border-b transition-colors last:border-0 hover:bg-cream/40 ${rowBg}`}
                       >
-                        <Link
-                          href={`/services/${s.slug}`}
-                          className={linkClass}
-                        >
-                          {s.title}
-                        </Link>
-                      </th>
-                      <td className="text-ink/65 px-5 py-4 md:px-6">
-                        {s.duration}
-                      </td>
-                      <td className="text-sage px-5 py-4 font-display text-base font-semibold tabular-nums md:px-6 md:text-lg">
-                        {s.priceLabel}
-                        {s.priceNote ? (
-                          <span className="text-ink/45 font-sans text-sm font-normal">
-                            {" "}
-                            ({s.priceNote})
-                          </span>
+                        {tierIdx === 0 ? (
+                          <th
+                            className="text-ink align-top px-5 py-4 font-normal md:px-6"
+                            rowSpan={tiers.length}
+                            scope="row"
+                          >
+                            <Link
+                              href={`/services/${s.slug}`}
+                              className={linkClass}
+                            >
+                              {s.title}
+                            </Link>
+                            {s.priceNote ? (
+                              <span className="text-ink/45 mt-2 block text-xs font-normal">
+                                ({s.priceNote})
+                              </span>
+                            ) : null}
+                          </th>
                         ) : null}
-                      </td>
-                    </tr>
-                  ))}
+                        <td className="text-ink/65 px-5 py-4 md:px-6">
+                          {t.duration}
+                        </td>
+                        <td className="text-sage px-5 py-4 font-display text-base font-semibold tabular-nums md:px-6 md:text-lg">
+                          {t.priceLabel}
+                        </td>
+                      </tr>
+                    ));
+                  })}
                 </tbody>
               </table>
             </div>

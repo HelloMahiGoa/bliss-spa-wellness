@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Service } from "@/data/services";
-import { getServiceBySlug, services } from "@/data/services";
+import {
+  getPricingTiers,
+  getServiceBySlug,
+  services,
+} from "@/data/services";
 import { getServiceImageAlt, getServiceImageSrc } from "@/lib/service-images";
 import {
   getWhatsAppHref,
@@ -22,6 +26,7 @@ function getRelatedServices(service: Service): Service[] {
 }
 
 export function ServicePageView({ service }: { service: Service }) {
+  const tiers = getPricingTiers(service);
   const imageSrc = getServiceImageSrc(service.slug);
   const imageAlt = getServiceImageAlt(service.title);
   const related = getRelatedServices(service);
@@ -125,6 +130,25 @@ export function ServicePageView({ service }: { service: Service }) {
               </span>
             </div>
 
+            {tiers.length > 1 ? (
+              <ul
+                className="border-ink/10 bg-parchment/60 mt-5 w-full max-w-md space-y-2 rounded-xl border px-4 py-3 text-sm"
+                aria-label="Price options"
+              >
+                {tiers.map((t) => (
+                  <li
+                    key={`${t.duration}-${t.priceInr}`}
+                    className="text-ink/80 flex items-start justify-between gap-3 border-b border-ink/5 pb-2 last:border-0 last:pb-0"
+                  >
+                    <span className="min-w-0 leading-snug">{t.duration}</span>
+                    <span className="text-sage font-display shrink-0 font-semibold tabular-nums">
+                      {t.priceLabel}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
             {service.highlights && service.highlights.length > 0 ? (
               <ul className="mt-6 flex flex-wrap gap-2">
                 {service.highlights.map((h) => (
@@ -191,20 +215,37 @@ export function ServicePageView({ service }: { service: Service }) {
                   session—written so you know exactly what you&apos;re booking.
                 </p>
               </div>
-              <div className="border-copper/15 from-parchment/90 to-cream/50 text-ink/70 flex shrink-0 flex-wrap items-center gap-x-6 gap-y-2 rounded-2xl border bg-gradient-to-br px-5 py-4 text-xs font-medium sm:text-sm">
-                <span className="text-copper font-bold uppercase tracking-wider">
+              <div className="border-copper/15 from-parchment/90 to-cream/50 text-ink/70 min-w-0 max-w-md shrink-0 rounded-2xl border bg-gradient-to-br px-5 py-4 text-xs sm:text-sm">
+                <p className="text-copper font-bold uppercase tracking-wider">
                   On the menu
-                </span>
-                <span className="text-ink/35 hidden sm:inline" aria-hidden>
-                  ·
-                </span>
-                <span>{service.duration}</span>
-                <span className="text-ink/35" aria-hidden>
-                  ·
-                </span>
-                <span className="text-sage font-display text-base font-semibold tabular-nums">
-                  {service.priceLabel}
-                </span>
+                </p>
+                {tiers.length > 1 ? (
+                  <ul className="mt-3 space-y-2">
+                    {tiers.map((t) => (
+                      <li
+                        key={`menu-${t.duration}-${t.priceInr}`}
+                        className="flex items-start justify-between gap-3 border-b border-ink/8 pb-2 last:border-0 last:pb-0"
+                      >
+                        <span className="text-ink/75 min-w-0 leading-snug">
+                          {t.duration}
+                        </span>
+                        <span className="text-sage font-display shrink-0 font-semibold tabular-nums">
+                          {t.priceLabel}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <span>{service.duration}</span>
+                    <span className="text-ink/35" aria-hidden>
+                      ·
+                    </span>
+                    <span className="text-sage font-display text-base font-semibold tabular-nums">
+                      {service.priceLabel}
+                    </span>
+                  </p>
+                )}
               </div>
             </div>
 
@@ -244,8 +285,9 @@ export function ServicePageView({ service }: { service: Service }) {
                           Full treatment
                         </p>
                         <p className="text-ink/60 mt-1 text-xs leading-relaxed">
-                          {service.duration} of uninterrupted work in a private
-                          room—fresh linens, warm oil, heated table.
+                          {tiers.length > 1
+                            ? "Your chosen duration in a private room—fresh linens, warm oil, heated table. See price options above."
+                            : `${service.duration} of uninterrupted work in a private room—fresh linens, warm oil, heated table.`}
                         </p>
                       </div>
                     </li>

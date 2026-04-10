@@ -20,6 +20,7 @@ const serviceImagePathBySlug: Record<string, string> = {
   "thai-massage": "/images/thai-massage.avif",
   "hot-stone-massage": "/images/hot-stone-massage.avif",
   "sports-massage": "/images/sports-massage.avif",
+  "ten-massage-package": "/images/relaxation-massage.avif",
 };
 
 const fallbackImage = "/images/relaxation-massage.avif";
