@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
@@ -8,7 +8,7 @@ import {
   getPricingTiers,
   getServiceBySlug,
 } from "@/data/services";
-import { getServiceImageSrc } from "@/lib/service-images";
+import { getServiceImageAlt, getServiceImageSrc } from "@/lib/service-images";
 import {
   siteAddress,
   siteLocalSeoLine,
@@ -39,15 +39,21 @@ export async function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) {
     return { title: "Service" };
   }
 
+  const resolvedParent = await parent;
   const canonical = `${siteUrl}/services/${slug}`;
-  const ogImage = `${siteUrl}${getServiceImageSrc(slug)}`;
+  /** Same file as the hero (`ServicePageView`); resolved to absolute URL via root `metadataBase`. */
+  const serviceImageSrc = getServiceImageSrc(slug);
+  const serviceImageAlt = getServiceImageAlt(service.title);
   const keywords = buildServiceKeywords(service.title, service.seoKeywords);
 
   return {
@@ -66,6 +72,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     },
     openGraph: {
+      ...(resolvedParent.openGraph ?? {}),
       title: service.metaTitle,
       description: service.metaDescription,
       url: canonical,
@@ -75,10 +82,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "website",
       images: [
         {
-          url: ogImage,
+          url: serviceImageSrc,
           width: 1200,
           height: 630,
-          alt: `${service.title} at ${siteName}, GTB Nagar`,
+          alt: serviceImageAlt,
         },
       ],
     },
@@ -86,7 +93,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: service.metaTitle,
       description: service.metaDescription,
-      images: [ogImage],
+      images: [serviceImageSrc],
     },
     robots: {
       index: true,

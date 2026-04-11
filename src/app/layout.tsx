@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import {
+  defaultOgImagePath,
   sameAsLinks,
   siteAddress,
   siteDescription,
@@ -49,11 +50,20 @@ export const metadata: Metadata = {
     description: siteDescription,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: defaultOgImagePath,
+        width: 1200,
+        height: 630,
+        alt: `${siteName} — massage and wellness spa in GTB Nagar, Delhi`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
+    images: [defaultOgImagePath],
   },
   robots: {
     index: true,

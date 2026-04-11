@@ -31,6 +31,12 @@ export function formatAddressBlock(): string {
 export const siteLocalSeoLine =
   "Massage spa in GTB Nagar, Delhi — Hudson Lane, Kingsway Camp, near Uttam Chai.";
 
+/**
+ * Default social preview image for pages that do not set their own `openGraph.images`.
+ * Served from `/public/images/…`.
+ */
+export const defaultOgImagePath = "/images/relaxation-massage.avif";
+
 /** Google Business Profile / Maps share link */
 export const googleBusinessProfileUrl =
   "https://share.google/eQijGmK4Ad9SN4oe1";

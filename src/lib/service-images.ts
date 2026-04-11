@@ -1,3 +1,5 @@
+import { defaultOgImagePath } from "@/lib/site";
+
 /**
  * Service hero images in /public/images (served as /images/...).
  * Filenames match slugs except where noted.
@@ -23,7 +25,7 @@ const serviceImagePathBySlug: Record<string, string> = {
   "ten-massage-package": "/images/relaxation-massage.avif",
 };
 
-const fallbackImage = "/images/relaxation-massage.avif";
+const fallbackImage = defaultOgImagePath;
 
 export function getServiceImageSrc(slug: string): string {
   return serviceImagePathBySlug[slug] ?? fallbackImage;
