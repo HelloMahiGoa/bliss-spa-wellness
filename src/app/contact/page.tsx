@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Contact & location",
   description:
-    "Contact Blissful Spa & Wellness in GTB Nagar, Delhi. Phone 7678623255. 1st Floor, 2521 Hudson Lane, above Mr Crust, near Uttam Chai, Kingsway Camp, New Delhi 110009.",
+    "Contact Blissful Spa & Wellness in GTB Nagar, Delhi. Phone 8796029392. 1st Floor, 2521 Hudson Lane, above Mr Crust, near Uttam Chai, Kingsway Camp, New Delhi 110009.",
 };
 
 export default function ContactPage() {

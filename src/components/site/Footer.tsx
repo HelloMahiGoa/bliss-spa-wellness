@@ -65,16 +65,8 @@ export function Footer() {
             </h2>
             <ul className="text-parchment/75 space-y-3 text-sm md:text-base">
               <li className="border-parchment/10 flex justify-between border-b border-dashed pb-2">
-                <span>Mon–Thu</span>
-                <span className="text-parchment/90 tabular-nums">9:00–20:00</span>
-              </li>
-              <li className="border-parchment/10 flex justify-between border-b border-dashed pb-2">
-                <span>Fri–Sat</span>
-                <span className="text-parchment/90 tabular-nums">9:00–21:00</span>
-              </li>
-              <li className="flex justify-between pt-1">
-                <span>Sunday</span>
-                <span className="text-parchment/90 tabular-nums">10:00–18:00</span>
+                <span>Mon–Sun</span>
+                <span className="text-parchment/90 tabular-nums">10:30 AM–10:00 PM</span>
               </li>
             </ul>
           </div>

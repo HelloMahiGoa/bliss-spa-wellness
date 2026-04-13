@@ -7,7 +7,7 @@ export const faqs: FaqItem[] = [
   {
     question: "How do I book a massage at Blissful Spa in GTB Nagar?",
     answer:
-      "Call +91 7678623255 or message us on WhatsApp. Same-day slots are sometimes available on weekdays; weekends are busier, so booking a day ahead helps. Tell us the service, preferred time, and whether you want steam or jacuzzi add-ons.",
+      "Call +91 8796029392 or message us on WhatsApp. Same-day slots are sometimes available on weekdays; weekends are busier, so booking a day ahead helps. Tell us the service, preferred time, and whether you want steam or jacuzzi add-ons.",
   },
   {
     question: "Where exactly is the spa on Hudson Lane?",

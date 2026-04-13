@@ -6,8 +6,8 @@ export const siteDescription =
 /** Replace with your live domain when deployed */
 export const siteUrl = "https://blissfulspawellness.example.com";
 
-export const sitePhoneDisplay = "7678623255";
-export const sitePhoneTel = "tel:+917678623255";
+export const sitePhoneDisplay = "8796029392";
+export const sitePhoneTel = "tel:+918796029392";
 
 export const siteAddress = {
   line1: "1st Floor, 2521 Hudson Lane",
@@ -43,7 +43,7 @@ export const googleBusinessProfileUrl =
 
 export const whatsAppDisplay = "WhatsApp";
 export function getWhatsAppHref(prefill?: string): string {
-  const base = "https://wa.me/917678623255";
+  const base = "https://wa.me/918796029392";
   if (!prefill?.trim()) return base;
   return `${base}?text=${encodeURIComponent(prefill)}`;
 }

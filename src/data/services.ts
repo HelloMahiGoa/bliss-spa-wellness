@@ -86,7 +86,7 @@ export const services: Service[] = [
     metaTitle:
       "Relaxation massage in GTB Nagar from ₹1,500 | Blissful Spa & Wellness",
     metaDescription:
-      "Relaxation massage with shower on Hudson Lane—45, 60, or 90 min options from ₹1,500. Near Kingsway Camp & North Campus. Call 7678623255 to book.",
+      "Relaxation massage with shower on Hudson Lane—45, 60, or 90 min options from ₹1,500. Near Kingsway Camp & North Campus. Call 8796029392 to book.",
     paragraphs: [
       "When your week has been loud—traffic, screens, deadlines—a relaxation massage gives your nervous system a proper exhale. We use long, rhythmic strokes and light-to-medium pressure so your muscles can let go without bracing against deep work.",
       "Every session starts with a quick check-in: areas that feel heavy, scents you prefer, and how sensitive you are to pressure. Warm oil and a heated table help you settle in faster, so the first ten minutes already feel like a downshift.",
@@ -138,7 +138,7 @@ export const services: Service[] = [
       {
         question: "Do I need to book in advance?",
         answer:
-          "We recommend calling or messaging ahead—weekends and evenings fill quickly. Same-day slots sometimes open; phone +91 7678623255 or WhatsApp us with your preferred time.",
+          "We recommend calling or messaging ahead—weekends and evenings fill quickly. Same-day slots sometimes open; phone +91 8796029392 or WhatsApp us with your preferred time.",
       },
       {
         question: "What should I wear or bring?",
@@ -215,7 +215,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call +91 7678623255 or WhatsApp us with your preferred time. Same-day slots sometimes open; evenings and weekends book fastest, so messaging ahead helps.",
+          "Call +91 8796029392 or WhatsApp us with your preferred time. Same-day slots sometimes open; evenings and weekends book fastest, so messaging ahead helps.",
       },
     ],
   },
@@ -288,7 +288,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call +91 7678623255 or WhatsApp with your preferred time. Weekends fill quickly—booking ahead is best.",
+          "Call +91 8796029392 or WhatsApp with your preferred time. Weekends fill quickly—booking ahead is best.",
       },
     ],
   },
@@ -360,7 +360,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Phone +91 7678623255 or WhatsApp with your preferred slot. Walk-in availability varies, so messaging ahead is safest.",
+          "Phone +91 8796029392 or WhatsApp with your preferred slot. Walk-in availability varies, so messaging ahead is safest.",
       },
     ],
   },
@@ -432,7 +432,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call or WhatsApp +91 7678623255. This package needs a longer room slot—advance booking is strongly recommended.",
+          "Call or WhatsApp +91 8796029392. This package needs a longer room slot—advance booking is strongly recommended.",
       },
     ],
   },
@@ -447,7 +447,7 @@ export const services: Service[] = [
     metaTitle:
       "Steam shower in GTB Nagar from ₹1,000 | Blissful Spa & Wellness",
     metaDescription:
-      "Private steam shower when you want warmth without a massage—30 minutes from ₹1,000 on Hudson Lane. Call 7678623255.",
+      "Private steam shower when you want warmth without a massage—30 minutes from ₹1,000 on Hudson Lane. Call 8796029392.",
     paragraphs: [
       "Not every visit needs a full massage. Sometimes you simply want quiet heat, a few deep breaths, and to step out feeling lighter. Our steam-only option is short, affordable, and easy to slot into a busy afternoon.",
       "Steam can help loosen the body before exercise or soften stiffness after travel. We recommend showering after, drinking water, and avoiding if you have uncontrolled high blood pressure or your doctor has advised against heat exposure.",
@@ -504,7 +504,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call +91 7678623255 or WhatsApp. Same-day slots sometimes open; messaging ahead secures your time.",
+          "Call +91 8796029392 or WhatsApp. Same-day slots sometimes open; messaging ahead secures your time.",
       },
     ],
   },
@@ -577,7 +577,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Phone +91 7678623255 or WhatsApp with your preferred date and time. Advance booking recommended.",
+          "Phone +91 8796029392 or WhatsApp with your preferred date and time. Advance booking recommended.",
       },
     ],
   },
@@ -650,7 +650,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call +91 7678623255 or WhatsApp with your preferred time.",
+          "Call +91 8796029392 or WhatsApp with your preferred time.",
       },
     ],
   },
@@ -795,7 +795,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Phone +91 7678623255 or WhatsApp. This is a premium slot—advance booking is essential.",
+          "Phone +91 8796029392 or WhatsApp. This is a premium slot—advance booking is essential.",
       },
     ],
   },
@@ -868,7 +868,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call +91 7678623255 or WhatsApp with your preferred time and any injury notes.",
+          "Call +91 8796029392 or WhatsApp with your preferred time and any injury notes.",
       },
     ],
   },
@@ -941,7 +941,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Phone +91 7678623255 or WhatsApp—same-day slots sometimes open.",
+          "Phone +91 8796029392 or WhatsApp—same-day slots sometimes open.",
       },
     ],
   },
@@ -1014,7 +1014,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call +91 7678623255 or WhatsApp with your preferred duration (45, 60, or 90 minutes plus shower). Advance booking is best.",
+          "Call +91 8796029392 or WhatsApp with your preferred duration (45, 60, or 90 minutes plus shower). Advance booking is best.",
       },
     ],
   },
@@ -1087,7 +1087,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Phone +91 7678623255 or WhatsApp. Allow time for the duration you choose plus shower and arrival buffer.",
+          "Phone +91 8796029392 or WhatsApp. Allow time for the duration you choose plus shower and arrival buffer.",
       },
     ],
   },
@@ -1160,7 +1160,7 @@ export const services: Service[] = [
       {
         question: "How do I book?",
         answer:
-          "Call +91 7678623255 or WhatsApp with your sport, recent training, and preferred time.",
+          "Call +91 8796029392 or WhatsApp with your sport, recent training, and preferred time.",
       },
     ],
   },
@@ -1231,7 +1231,7 @@ export const services: Service[] = [
       {
         question: "How do I buy it?",
         answer:
-          "Call +91 7678623255 or WhatsApp. Payment and start date are confirmed at purchase.",
+          "Call +91 8796029392 or WhatsApp. Payment and start date are confirmed at purchase.",
       },
     ],
   },
